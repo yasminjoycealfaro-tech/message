@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Our Love System 💚</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#04140d,#0b3d27);
+color:white;
+overflow:auto;
+}
+
+
+/* SCREEN */
+
+.screen{
+display:none;
+min-height:100vh;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:20px;
+opacity:0;
+transform:scale(.95);
+transition:.5s;
+overflow-y:auto;
+}
+
+.active{
+display:flex;
+opacity:1;
+transform:scale(1);
+}
+
+
+/* CARD */
+
+.card{
+background:rgba(255,255,255,.1);
+backdrop-filter:blur(15px);
+padding:25px;
+border-radius:20px;
+width:90%;
+max-width:450px;
+max-height:90vh;
+overflow-y:auto;
+
+box-shadow:
+0 0 30px rgba(82,183,136,.3);
+}
+
+/* TITLE */
+
+.title{
+font-size:45px;
+color:#52b788;
+}
+
+
+/* BUTTON */
+
+button{
+background:#52b788;
+color:white;
+border:none;
+padding:12px 25px;
+border-radius:15px;
+margin:10px;
+cursor:pointer;
+font-size:16px;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+
+/* INPUT */
+
+input{
+width:80%;
+padding:12px;
+border-radius:10px;
+border:none;
+margin:10px;
+}
+
+
+/* KEYPAD */
+
+.lockBox{
+display:grid;
+grid-template-columns:repeat(3,70px);
+gap:10px;
+justify-content:center;
+}
+
+.key{
+height:70px;
+font-size:22px;
+background:#1b4332;
+}
+
+
+#display{
+font-size:30px;
+letter-spacing:10px;
+color:#52b788;
+}
+
+
+/* IMAGE */
+
+img{
+border-radius:20px;
+transition:.5s;
+}
+
+.memory img{
+width:90%;
+max-width:350px;
+animation:zoom 4s infinite;
+}
+
+
+@keyframes zoom{
+
+0%,100%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.08);
+}
+
+}
+
+
+/* GIFT */
+
+.giftImg{
+width:250px;
+animation:float 3s infinite;
+}
+
+
+@keyframes float{
+
+50%{
+transform:translateY(-15px);
+}
+
+}
+
+
+/* HEARTS */
+
+.heart{
+
+position:fixed;
+bottom:-20px;
+animation:heart 6s linear;
+
+}
+
+
+@keyframes heart{
+
+to{
+
+transform:translateY(-100vh);
+opacity:0;
+
+}
+
+}
+
+
+/* VIDEO */
+
+video{
+
+width:100%;
+border-radius:20px;
+
+}
+
+
+/* FINAL TEXT */
+
+#finalText{
+
+white-space:pre-line;
+line-height:1.7;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<audio id="music1" loop>
+<source src="music1.mp3">
+</audio>
+
+<audio id="music2" loop>
+<source src="music2.mp3">
+</audio>
+
+<audio id="click">
+<source src="click.mp3">
+</audio>
+
+
+<!-- LOCK -->
+
+<div id="lock" class="screen active">
+
+<h1 class="title">
+Love Access 💚
+</h1>
+
+<p>Enter our secret code</p>
+
+<div id="display"></div>
+
+
+<div class="lockBox">
+
+<button class="key" onclick="press(1)">1</button>
+<button class="key" onclick="press(2)">2</button>
+<button class="key" onclick="press(3)">3</button>
+
+<button class="key" onclick="press(4)">4</button>
+<button class="key" onclick="press(5)">5</button>
+<button class="key" onclick="press(6)">6</button>
+
+<button class="key" onclick="press(7)">7</button>
+<button class="key" onclick="press(8)">8</button>
+<button class="key" onclick="press(9)">9</button>
+
+<button class="key" onclick="clearCode()">C</button>
+<button class="key" onclick="press(0)">0</button>
+<button class="key" onclick="checkCode()">✓</button>
+
+</div>
+
+</div>
+
+
+
+<!-- CHALLENGE 1 -->
+
+<div id="c1" class="screen">
+
+<div class="card">
+
+<h2>Challenge 1 💚</h2>
+
+<p>What keeps love alive?</p>
+
+<input id="a1">
+
+<button onclick="next1()">Next</button>
+
+</div>
+
+</div>
+
+
+
+<!-- CHALLENGE 2 -->
+
+<div id="c2" class="screen">
+
+<div class="card">
+
+<h2>Challenge 2 💚</h2>
+
+<p>If I = YOU, then WE = ?</p>
+
+<input id="a2">
+
+<button onclick="next2()">Next</button>
+
+</div>
+
+</div>
+
+
+
+<!-- CHALLENGE 3 -->
+
+<div id="c3" class="screen">
+
+<div class="card">
+
+<h2>Final Challenge 💚</h2>
+
+<p>What is stronger than distance?</p>
+
+<input id="a3">
+
+<button onclick="finish()">Unlock</button>
+
+</div>
+
+</div>
+
+
+
+<!-- GREETING -->
+
+<div id="greet" class="screen">
+
+<div class="card">
+
+<h1 class="title">
+Happy Monthsary Love 💚
+</h1>
+
+<p>
+Before everything... this is us.
+</p>
+
+<img src="pic5.jpg" width="300">
+
+<p>
+Same outfit, same heart, same love 💚
+</p>
+
+<button onclick="goMenu()">
+Continue
+</button>
+
+</div>
+
+</div>
+
+
+
+
+<!-- MENU -->
+
+<div id="menu" class="screen">
+
+<div class="card">
+
+<h2>
+Choose Our Memory 💚
+</h2>
+
+
+<button onclick="show('mem')">
+📸 Memories
+</button>
+
+
+<button onclick="show('gift')">
+🎁 Gifts
+</button>
+
+
+<button onclick="show('letter')">
+💌 Message
+</button>
+
+
+<button onclick="show('final')">
+💚 Forever
+</button>
+
+
+</div>
+
+</div>
+
+
+
+
+<!-- MEMORIES -->
+
+<div id="mem" class="screen">
+
+<div class="card memory">
+
+<h2>
+Our Memories 📸
+</h2>
+
+
+<img id="slide" src="pic1.jpg">
+
+
+<br>
+
+<button onclick="back()">
+Back
+</button>
+
+
+</div>
+
+</div>
+
+
+
+
+<!-- GIFTS -->
+
+<div id="gift" class="screen">
+
+<div class="card">
+
+<h2>
+Gift For You 🎁
+</h2>
+
+
+<img class="giftImg" src="gift.jpg">
+
+
+<p>🌸 Flowers of Love</p>
+
+<p>🧸 Bear of Comfort</p>
+
+<p>💚 Endless Care</p>
+
+
+<p>
+These gifts may be simple,
+but they carry my love for you.
+</p>
+
+
+<button onclick="back()">
+Back
+</button>
+
+
+</div>
+
+</div>
+
+
+
+
+<!-- MESSAGE -->
+
+<div id="letter" class="screen">
+
+<div class="card">
+
+<h2>
+Love Letter 💌
+</h2>
+
+
+<p id="letterText"></p>
+
+
+<button onclick="typeLetter()">
+Reveal Message
+</button>
+
+
+<button onclick="back()">
+Back
+</button>
+
+
+</div>
+
+</div>
+
+
+
+
+<!-- FINAL -->
+
+<div id="final" class="screen">
+
+<div class="card">
+
+<h2>
+💚 Our Forever
+</h2>
+
+
+
+<video autoplay muted loop controls>
+
+<source src="video.mp4" type="video/mp4">
+
+</video>
+
+
+
+<div class="finalPics">
+
+<img src="pic1.jpg" width="90">
+<img src="pic2.jpg" width="90">
+<img src="pic3.jpg" width="90">
+<img src="pic4.jpg" width="90">
+<img src="pic5.jpg" width="90">
+
+</div>
+
+
+<p id="finalText"></p>
+
+
+<button onclick="typeFinal()">
+Start Message 💚
+</button>
+
+
+<button onclick="back()">
+Back
+</button>
+
+
+</div>
+
+</div>
+
+<script>
+
+// SCREEN CONTROL
+
+function show(id){
+
+document.querySelectorAll(".screen")
+.forEach(s=>s.classList.remove("active"));
+
+document.getElementById(id)
+.classList.add("active");
+
+}
+
+
+
+// CLICK SOUND
+
+function clickSound(){
+
+let c=document.getElementById("click");
+
+c.currentTime=0;
+
+c.play().catch(()=>{});
+
+}
+
+
+
+// PASSWORD
+
+let code="";
+let started=false;
+
+
+function press(n){
+
+clickSound();
+
+
+if(!started){
+
+document.getElementById("music1")
+.play()
+.catch(()=>{});
+
+started=true;
+
+}
+
+
+code+=n;
+
+
+document.getElementById("display")
+.innerText="●".repeat(code.length);
+
+}
+
+
+
+function clearCode(){
+
+clickSound();
+
+code="";
+
+document.getElementById("display")
+.innerText="";
+
+}
+
+
+
+function checkCode(){
+
+clickSound();
+
+
+if(code==="052726"){
+
+show("c1");
+
+}
+
+else{
+
+alert("Wrong password 💔");
+
+clearCode();
+
+}
+
+}
+
+
+
+
+// CHALLENGES
+
+
+function next1(){
+
+let a=document.getElementById("a1")
+.value
+.trim()
+.toLowerCase();
+
+
+if(a==="trust"){
+
+show("c2");
+
+}
+
+else{
+
+alert("Try again 💚");
+
+}
+
+}
+
+
+
+
+
+function next2(){
+
+let a=document.getElementById("a2")
+.value
+.trim()
+.toLowerCase();
+
+
+if(a==="forever"){
+
+show("c3");
+
+}
+
+else{
+
+alert("Try again 💚");
+
+}
+
+}
+
+
+
+
+
+function finish(){
+
+let a=document.getElementById("a3")
+.value
+.trim()
+.toLowerCase();
+
+
+if(a==="love"){
+
+show("greet");
+
+}
+
+else{
+
+alert("Try again 💚");
+
+}
+
+}
+
+
+
+
+
+// MUSIC TRANSITION
+
+
+function goMenu(){
+
+show("menu");
+
+
+let m1=document.getElementById("music1");
+
+let m2=document.getElementById("music2");
+
+
+m2.volume=0;
+
+
+m2.play()
+.catch(()=>{});
+
+
+
+let fade=setInterval(()=>{
+
+
+if(m1.volume>0.05){
+
+m1.volume-=0.05;
+
+}
+
+else{
+
+clearInterval(fade);
+
+m1.pause();
+
+m1.currentTime=0;
+
+}
+
+
+},100);
+
+
+
+
+
+let fadeIn=setInterval(()=>{
+
+
+if(m2.volume<1){
+
+m2.volume+=0.05;
+
+}
+
+else{
+
+clearInterval(fadeIn);
+
+}
+
+
+},100);
+
+
+
+createHearts();
+
+
+}
+
+
+
+
+function back(){
+
+show("menu");
+
+}
+
+
+
+
+
+// IMAGE SLIDESHOW
+
+
+let pics=[
+
+"pic1.jpg",
+
+"pic2.jpg",
+
+"pic3.jpg",
+
+"pic4.jpg",
+
+"pic5.jpg"
+
+];
+
+
+let index=0;
+
+
+
+setInterval(()=>{
+
+
+let img=document.getElementById("slide");
+
+
+if(img){
+
+
+img.style.opacity=0;
+
+
+setTimeout(()=>{
+
+
+img.src=pics[index];
+
+
+img.style.opacity=1;
+
+
+index++;
+
+
+if(index>=pics.length){
+
+index=0;
+
+}
+
+
+},500);
+
+
+}
+
+
+},2500);
+
+
+
+
+
+// LETTER
+
+
+let letter=
+
+`Hi love 💚
+
+Happy first monthsary.
+
+Thank you for coming into my life.
+
+You make ordinary days become special.
+
+Thank you for your love, patience, and understanding.
+
+I know we are not perfect,
+
+but I promise to keep choosing you every day.
+
+Distance, problems, and challenges will never change what I feel.
+
+I will always stay beside you.
+
+I love you forever 💚`;
+
+
+
+let l=0;
+
+
+
+function typeLetter(){
+
+
+if(l<letter.length){
+
+
+document.getElementById("letterText")
+.innerHTML+=letter.charAt(l);
+
+
+l++;
+
+
+setTimeout(typeLetter,40);
+
+
+}
+
+
+}
+
+
+
+
+
+// FINAL MESSAGE
+
+
+let final=
+
+`Hi love 💚
+
+This is our little story. From the first moment until now, every memory with you is something I treasure. Thank you for making me smile.
+Thank you for staying. It’s not a joke what we have been through. We have faced so many problems and challenges that almost made us give up, but you still chose to stay.I can truly feel your love and effort for me. Thank you for your patience, understanding, and everything you do for me. I’m sorry for the mistakes I make, for the moments when I unintentionally hurt you, and for the times when I become too sensitive. I appreciate every effort, every sacrifice, and every moment you spend with me. Saka na muna ang regalo, love ah? Wala pa me naipon eh hehehe. Bawi ako sa’yo sa susunod love. Thank you for staying with me, choosing me, and loving me despite everything. Today, tomorrow, and always. Happy monthsary love. I love you forever 💚`
+
+
+
+
+
+
+;
+
+
+
+let f=0;
+
+
+
+function typeFinal(){
+
+
+if(f<final.length){
+
+
+document.getElementById("finalText")
+.innerHTML+=final.charAt(f);
+
+
+f++;
+
+
+setTimeout(typeFinal,45);
+
+
+}
+
+
+}
+
+
+
+
+
+// FLOATING HEARTS
+
+
+function createHearts(){
+
+
+setInterval(()=>{
+
+
+let h=document.createElement("div");
+
+
+h.className="heart";
+
+
+h.innerHTML="💚";
+
+
+h.style.left=Math.random()*100+"vw";
+
+
+document.body.appendChild(h);
+
+
+
+setTimeout(()=>{
+
+
+h.remove();
+
+
+},6000);
+
+
+
+},500);
+
+
+}
+
+
+
+</script>
+
+
+</body>
+
+</html>
